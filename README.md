@@ -6,7 +6,7 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/Frontend%20Team%20Lead-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Frontend Team Lead" />
-  <img src="https://img.shields.io/badge/12%2B+%20Years%20Experience-4ECDC4?style=for-the-badge&logo=code&logoColor=white" alt="Experience" />
+  <img src="https://img.shields.io/badge/12%2B%20Years%20Experience-4ECDC4?style=for-the-badge&logo=code&logoColor=white" alt="Experience" />
   <img src="https://img.shields.io/badge/Red%20Ventures-FF6B6B?style=for-the-badge&logo=company&logoColor=white" alt="Red Ventures" />
 </div>
 
