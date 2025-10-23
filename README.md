@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2E86AB&center=true&vCenter=true&width=800&lines=Frontend+Team+Lead+%7C+11%2B+Years+Experience;Building+Amazing+Web+Experiences;Red+Ventures+%7C+AllConnect+%7C+MyMove" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2E86AB&center=true&vCenter=true&width=800&lines=Frontend+Team+Lead+%7C+12%2B+Years+Experience;Building+Amazing+Web+Experiences;Red+Ventures+%7C+AllConnect+%7C+MyMove" alt="Typing SVG" />
 </div>
 
 <br>
 
 <div align="center">
   <img src="https://img.shields.io/badge/Frontend%20Team%20Lead-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Frontend Team Lead" />
-  <img src="https://img.shields.io/badge/11%2B+%20Years%20Experience-4ECDC4?style=for-the-badge&logo=code&logoColor=white" alt="Experience" />
+  <img src="https://img.shields.io/badge/12%2B+%20Years%20Experience-4ECDC4?style=for-the-badge&logo=code&logoColor=white" alt="Experience" />
   <img src="https://img.shields.io/badge/Red%20Ventures-FF6B6B?style=for-the-badge&logo=company&logoColor=white" alt="Red Ventures" />
 </div>
 
@@ -103,7 +103,7 @@
 
 <div align="center">
 
-### 🚀 **11+ Years of Frontend Excellence**
+### 🚀 **12+ Years of Frontend Excellence**
 
 <table>
 <tr>
