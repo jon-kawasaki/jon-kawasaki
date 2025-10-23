@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2E86AB&center=true&vCenter=true&width=600&lines=Frontend+Team+Lead+%7C+11%2B+Years+Experience;Building+Amazing+Web+Experiences;Red+Ventures+%7C+AllConnect+%7C+MyMove" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=2E86AB&center=true&vCenter=true&width=800&lines=Frontend+Team+Lead+%7C+11%2B+Years+Experience;Building+Amazing+Web+Experiences;Red+Ventures+%7C+AllConnect+%7C+MyMove" alt="Typing SVG" />
 </div>
 
 <br>
@@ -12,25 +12,42 @@
 
 <br>
 
-## 🚀 About Me
-
-**Jonathan Kawasaki** is a seasoned Frontend Team Lead with **11+ years of experience** crafting exceptional web experiences. 
-
-Driven by the psychology of user interaction and the art of translating complex problems into intuitive digital solutions, this approach combines technical expertise with deep empathy for user needs. The belief is that the best code emerges when we truly understand the human behind every click, scroll, and interaction.
-
-At **Red Ventures**, leadership is guided by a growth mindset, fostering environments where creativity meets precision. The intersection of technology and human behavior presents endless opportunities to make digital experiences feel more natural, accessible, and meaningful.
-
-The philosophy centers on the belief that exceptional frontend development isn't just about writing clean code—it's about understanding the cognitive load placed on users and designing experiences that feel effortless and empowering.
-
 ## 🎓 Education
 
-**University of California, Berkeley**  
+<div align="center">
+
+<table>
+<tr>
+<td width="50%">
+
+### 🎓 University of California, Berkeley
 *Bachelor's degree, Computer Science*  
 *Aug 2009 - May 2013*
 
-**Downtown Magnets High School**  
+**Key Focus Areas:**
+- Computer Science fundamentals
+- Software engineering principles
+- Data structures and algorithms
+- System design and architecture
+
+</td>
+<td width="50%">
+
+### 🏫 Downtown Magnets High School
 *High School Diploma, Software Engineering Pathway*  
 *Aug 2005 - Jun 2009*
+
+**Key Focus Areas:**
+- Software engineering foundation
+- Programming fundamentals
+- Problem-solving methodologies
+- Early development experience
+
+</td>
+</tr>
+</table>
+
+</div>
 
 
 ## 🌟 Portfolio Highlights
