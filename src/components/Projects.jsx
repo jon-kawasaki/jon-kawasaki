@@ -148,108 +148,70 @@ const Projects = () => {
       <div className="container">
         <div 
           ref={sectionRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-20 transition-all duration-1000 ${
             isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-700 dark:text-primary-300 font-medium mb-6">
+            <span className="w-2 h-2 bg-primary-500 rounded-full mr-3 animate-pulse"></span>
+            Featured Work
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Featured Projects
           </h2>
-          <p className="text-lg text-gray-600 dark:text-white max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
             High-impact projects showcasing expertise in scalable web platforms and mobile applications
           </p>
         </div>
 
-        {/* Projects Carousel */}
+        {/* Projects Grid */}
         <div 
           ref={carouselRef}
-          className={`relative max-w-6xl mx-auto transition-all duration-1000 ${
+          className={`max-w-7xl mx-auto transition-all duration-1000 ${
             isCarouselVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Carousel Container */}
-          <div className="overflow-hidden">
-            <div className="flex" style={getTransformStyle()}>
-              {extendedProjects.map((project, index) => {
-                const isActive = index === currentSlide + offset
-                const isPrev = !isMobile && index === currentSlide + offset - 1
-                const isNext = !isMobile && index === currentSlide + offset + 1
-                const isHovered = hoveredIndex === index
-                
-                return (
-                  <div key={index} className="w-full md:w-1/3 flex-shrink-0 px-2 md:px-4">
-                    <div 
-                      className={`card p-4 md:p-6 transition-all duration-500 ease-in-out cursor-pointer ${
-                        isHovered
-                          ? 'scale-105 md:scale-110 shadow-2xl z-10 opacity-100' 
-                          : (isPrev || isNext || isActive)
-                          ? 'scale-100 opacity-100'
-                          : isMobile 
-                          ? 'scale-100 opacity-0'
-                          : 'scale-90 md:scale-75 opacity-20'
-                      }`}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                      onClick={() => window.open(project.liveUrl, '_blank')}
-                    >
-                    {/* Project Thumbnail */}
-                    <div className="mb-4">
-                      <img 
-                        src={project.images[imageRotations[index % projects.length] || 0]} 
-                        alt={project.title}
-                        className="w-full h-40 md:h-48 object-cover rounded-lg transition-opacity duration-500"
-                        style={{ 
-                          opacity: imageOpacity[index % projects.length] !== undefined 
-                            ? imageOpacity[index % projects.length] 
-                            : 1 
-                        }}
-                      />
-                    </div>
-
-                    {/* Project Info */}
-                    <div className="text-center">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                      <p className="text-gray-600 dark:text-white text-sm mb-4">{project.description}</p>
-                      
-                      {/* Click to visit indicator */}
-                      <div className="flex items-center justify-center text-primary-600 dark:text-primary-400 text-sm font-medium">
-                        <Globe className="w-4 h-4 mr-2" />
-                        Click to visit live site
-                      </div>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
+              <div 
+                key={index} 
+                className={`group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer ${
+                  isCarouselVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+                onClick={() => window.open(project.liveUrl, '_blank')}
+              >
+                {/* Project Image */}
+                <div className="relative overflow-hidden">
+                  <img 
+                    src={project.images[0]} 
+                    alt={project.title}
+                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg">
+                      <ExternalLink className="w-4 h-4 text-gray-900 dark:text-white" />
                     </div>
                   </div>
-                )
-              })}
-            </div>
-          </div>
+                </div>
 
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 bg-white dark:bg-gray-800 rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
-          >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 bg-white dark:bg-gray-800 rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
-          >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-          </button>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center mt-6 md:mt-8 space-x-2">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-200 ${
-                  index === (currentSlide % projects.length)
-                    ? 'bg-primary-600 dark:bg-primary-400'
-                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                }`}
-              />
+                {/* Project Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  {/* Visit Link */}
+                  <div className="flex items-center text-primary-600 dark:text-primary-400 font-medium group-hover:text-primary-700 dark:group-hover:text-primary-300 transition-colors duration-300">
+                    <Globe className="w-4 h-4 mr-2" />
+                    <span className="text-sm">Visit Live Site</span>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -257,35 +219,38 @@ const Projects = () => {
         {/* Additional Info */}
         <div 
           ref={infoRef}
-          className={`mt-12 md:mt-16 text-center transition-all duration-1000 ${
+          className={`mt-16 text-center transition-all duration-1000 ${
             isInfoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="card p-6 md:p-8 max-w-4xl mx-auto">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              More Projects & Contributions
-            </h3>
-            <p className="text-gray-600 dark:text-white mb-6 text-sm md:text-base">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mr-4">
+                <Github className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-3xl font-bold text-gray-900 dark:text-white">More Projects & Contributions</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-8 text-lg leading-relaxed max-w-3xl mx-auto">
               I've contributed to numerous other projects including OpenTable and Square integrations, 
               various startup MVPs, and open-source contributions. Many of my recent projects are 
               proprietary to the companies I've worked with, but I'm always excited to discuss 
               the technical challenges and solutions I've implemented.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://github.com/jon-kawasaki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
-                <Github className="w-5 h-5 mr-2" />
+                <Github className="w-5 h-5 mr-3" />
                 View GitHub Profile
               </a>
               <a
                 href="#contact"
-                className="flex items-center justify-center px-6 py-3 border border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 rounded-lg hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 transition-colors duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 font-semibold rounded-xl hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
               >
-                <ExternalLink className="w-5 h-5 mr-2" />
+                <ExternalLink className="w-5 h-5 mr-3" />
                 Discuss Projects
               </a>
             </div>
