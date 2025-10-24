@@ -51,81 +51,118 @@ const Education = () => {
 
         <div 
           ref={educationRef}
-          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+          className={`max-w-6xl mx-auto transition-all duration-1000 ${
             isEducationVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {education.map((edu, index) => (
             <div 
               key={index} 
-              className={`card p-8 hover:shadow-xl transition-all duration-500 ${
+              className={`relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-700 ${
                 isEducationVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <div className="flex items-start">
-                <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center mr-6 flex-shrink-0">
-                  <GraduationCap className="w-8 h-8 text-primary-600" />
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{edu.institution}</h3>
-                      <p className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-1">{edu.degree}</p>
-                      <p className="text-gray-600 dark:text-white">{edu.description}</p>
+              {/* Decorative background elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-800 dark:to-primary-900 rounded-full -translate-y-16 translate-x-16 opacity-20"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-secondary-100 to-secondary-200 dark:from-secondary-800 dark:to-secondary-900 rounded-full translate-y-12 -translate-x-12 opacity-20"></div>
+              
+              <div className="relative z-10 p-8 md:p-12">
+                {/* Header Section */}
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-8">
+                  <div className="flex items-start space-x-6 mb-6 lg:mb-0">
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <GraduationCap className="w-10 h-10 text-white" />
                     </div>
-                    <div className="mt-4 md:mt-0 md:text-right">
-                      <div className="text-gray-500 dark:text-gray-400 mb-2">
-                        <span className="font-medium">{edu.duration}</span>
+                    <div className="flex-1">
+                      <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">{edu.institution}</h3>
+                      <div className="flex items-center space-x-4 mb-4">
+                        <span className="px-4 py-2 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-semibold">
+                          {edu.degree}
+                        </span>
+                        <span className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm font-medium">
+                          {edu.duration}
+                        </span>
                       </div>
-                      <div className="text-gray-500 dark:text-gray-400 mb-2">
-                        <span>{edu.location}</span>
-                      </div>
-                      <a
-                        href={edu.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
-                      >
-                        Visit Website
-                        <ExternalLink className="w-4 h-4 ml-1" />
-                      </a>
+                      <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed max-w-2xl">
+                        {edu.description}
+                      </p>
                     </div>
                   </div>
+                  
+                  <div className="flex flex-col items-end space-y-4">
+                    <div className="text-right">
+                      <div className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">Location</div>
+                      <div className="text-gray-900 dark:text-white font-semibold">{edu.location}</div>
+                    </div>
+                    <a
+                      href={edu.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                      Visit University
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </a>
+                  </div>
+                </div>
 
-                  <div 
-                    ref={activitiesRef}
-                    className={`mt-8 transition-all duration-1000 ${
-                      isActivitiesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                    }`}
-                  >
-                    <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Activities & Involvement</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {edu.activities.map((activity, actIndex) => (
-                        <div 
-                          key={actIndex} 
-                          className={`bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-500 ${
-                            isActivitiesVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
-                          }`}
-                          style={{ transitionDelay: `${actIndex * 100}ms` }}
-                        >
-                          <div className="flex items-start justify-between mb-3">
-                            <h5 className="text-lg font-semibold text-gray-900 dark:text-white">{activity.name}</h5>
+                {/* Activities Section */}
+                <div 
+                  ref={activitiesRef}
+                  className={`border-t border-gray-200 dark:border-gray-700 pt-8 transition-all duration-1000 ${
+                    isActivitiesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                >
+                  <div className="flex items-center mb-8">
+                    <div className="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mr-4">
+                      <span className="text-white font-bold text-lg">🎯</span>
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-bold text-gray-900 dark:text-white">Extracurricular Activities</h4>
+                      <p className="text-gray-600 dark:text-gray-300">Leadership and technical involvement during university</p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {edu.activities.map((activity, actIndex) => (
+                      <div 
+                        key={actIndex} 
+                        className={`group relative bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-500 hover:shadow-lg ${
+                          isActivitiesVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                        }`}
+                        style={{ transitionDelay: `${actIndex * 150}ms` }}
+                      >
+                        <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-800 dark:to-primary-900 rounded-full -translate-y-8 translate-x-8 opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-start justify-between mb-4">
+                            <h5 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                              {activity.name}
+                            </h5>
                             <a
                               href={activity.website}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300"
+                              className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-primary-100 dark:hover:bg-primary-800 rounded-lg transition-all duration-300 hover:scale-110"
                             >
-                              <ExternalLink className="w-4 h-4" />
+                              <ExternalLink className="w-4 h-4 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400" />
                             </a>
                           </div>
-                          <p className="text-gray-600 dark:text-white text-sm mb-2">{activity.description}</p>
-                          <p className="text-gray-500 dark:text-gray-400 text-xs font-medium">{activity.duration}</p>
+                          
+                          <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            {activity.description}
+                          </p>
+                          
+                          <div className="flex items-center justify-between">
+                            <span className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-semibold">
+                              {activity.duration}
+                            </span>
+                            <div className="w-2 h-2 bg-primary-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
+                          </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

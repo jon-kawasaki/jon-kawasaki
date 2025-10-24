@@ -23,7 +23,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16 relative">
+    <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16 pb-8 md:pb-16 relative">
       {/* Background Image */}
        <div 
          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 dark:opacity-30"
@@ -97,16 +97,16 @@ const Hero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 md:mb-12">
               <a
                 href="#contact"
-                className="btn-primary text-center"
+                className="btn-primary text-center py-4 px-8 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Get In Touch
               </a>
               <a
                 href="#projects"
-                className="btn-secondary text-center"
+                className="btn-secondary text-center py-4 px-8 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 View My Work
               </a>
