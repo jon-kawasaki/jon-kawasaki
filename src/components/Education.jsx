@@ -36,7 +36,7 @@ const Education = () => {
   ]
 
   return (
-    <section id="education" className="section-padding bg-white dark:bg-gray-800">
+    <section id="education" className="section-padding bg-gray-200 dark:bg-gray-900">
       <div className="container">
         <div 
           ref={sectionRef}
@@ -61,7 +61,7 @@ const Education = () => {
           {education.map((edu, index) => (
             <div 
               key={index} 
-              className={`relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-700 ${
+              className={`relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-700 border border-gray-200 dark:border-gray-700 ${
                 isEducationVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
               }`}
               style={{ transitionDelay: `${index * 200}ms` }}

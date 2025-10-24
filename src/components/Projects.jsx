@@ -144,7 +144,7 @@ const Projects = () => {
   }
 
   return (
-    <section id="projects" className="section-padding bg-gray-100 dark:bg-gray-900">
+    <section id="projects" className="section-padding bg-gray-100 dark:bg-gray-800">
       <div className="container">
         <div 
           ref={sectionRef}

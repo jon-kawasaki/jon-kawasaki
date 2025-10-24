@@ -67,7 +67,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="section-padding bg-white dark:bg-gray-800">
+    <section id="contact" className="section-padding bg-gray-300 dark:bg-gray-800">
       <div className="container">
         <div 
           ref={sectionRef}

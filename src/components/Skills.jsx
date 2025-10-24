@@ -41,7 +41,7 @@ const Skills = () => {
   ]
 
   return (
-    <section id="skills" className="section-padding bg-white dark:bg-gray-800">
+    <section id="skills" className="section-padding bg-gray-200 dark:bg-gray-900">
       <div className="container">
         <div 
           ref={sectionRef}
