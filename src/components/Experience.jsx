@@ -87,7 +87,7 @@ const Experience = () => {
         {/* Timeline */}
         <div 
           ref={experiencesRef}
-          className={`relative transition-all duration-1000 ${
+          className={`relative max-w-4xl mx-auto transition-all duration-1000 ${
             isExperiencesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >

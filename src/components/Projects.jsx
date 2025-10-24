@@ -12,6 +12,7 @@ const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const [imageRotations, setImageRotations] = useState({})
   const [imageOpacity, setImageOpacity] = useState({})
+  const [isMobile, setIsMobile] = useState(false)
 
   const projects = [
     {
@@ -51,6 +52,17 @@ const Projects = () => {
       liveUrl: 'https://squareup.com'
     }
   ]
+
+  // Handle responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    handleResize() // Set initial value
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   // Auto-slide functionality
   useEffect(() => {
@@ -122,8 +134,9 @@ const Projects = () => {
 
   // Calculate transform for smooth sliding animation
   const getTransformStyle = () => {
-    // Center the active project by moving the container
-    const translateX = -((currentSlide + offset) * 33.333) + 33.333
+    // On mobile, show 1 project at a time, on desktop show 3
+    const projectWidth = isMobile ? 100 : 33.333
+    const translateX = -((currentSlide + offset) * projectWidth) + (isMobile ? 0 : projectWidth)
     return {
       transform: `translateX(${translateX}%)`,
       transition: 'transform 500ms ease-in-out'
@@ -159,19 +172,21 @@ const Projects = () => {
             <div className="flex" style={getTransformStyle()}>
               {extendedProjects.map((project, index) => {
                 const isActive = index === currentSlide + offset
-                const isPrev = index === currentSlide + offset - 1
-                const isNext = index === currentSlide + offset + 1
+                const isPrev = !isMobile && index === currentSlide + offset - 1
+                const isNext = !isMobile && index === currentSlide + offset + 1
                 const isHovered = hoveredIndex === index
                 
                 return (
-                  <div key={index} className="w-1/3 flex-shrink-0 px-4">
+                  <div key={index} className="w-full md:w-1/3 flex-shrink-0 px-2 md:px-4">
                     <div 
-                      className={`card p-6 transition-all duration-500 ease-in-out cursor-pointer ${
+                      className={`card p-4 md:p-6 transition-all duration-500 ease-in-out cursor-pointer ${
                         isHovered
-                          ? 'scale-110 shadow-2xl z-10 opacity-100' 
+                          ? 'scale-105 md:scale-110 shadow-2xl z-10 opacity-100' 
                           : (isPrev || isNext || isActive)
                           ? 'scale-100 opacity-100'
-                          : 'scale-75 opacity-20'
+                          : isMobile 
+                          ? 'scale-100 opacity-0'
+                          : 'scale-90 md:scale-75 opacity-20'
                       }`}
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
@@ -182,7 +197,7 @@ const Projects = () => {
                       <img 
                         src={project.images[imageRotations[index % projects.length] || 0]} 
                         alt={project.title}
-                        className="w-full h-48 object-cover rounded-lg transition-opacity duration-500"
+                        className="w-full h-40 md:h-48 object-cover rounded-lg transition-opacity duration-500"
                         style={{ 
                           opacity: imageOpacity[index % projects.length] !== undefined 
                             ? imageOpacity[index % projects.length] 
@@ -212,24 +227,24 @@ const Projects = () => {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
+            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 md:-translate-x-4 bg-white dark:bg-gray-800 rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
+            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 md:translate-x-4 bg-white dark:bg-gray-800 rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center mt-8 space-x-2">
+          <div className="flex justify-center mt-6 md:mt-8 space-x-2">
             {projects.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-200 ${
                   index === (currentSlide % projects.length)
                     ? 'bg-primary-600 dark:bg-primary-400'
                     : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
@@ -242,21 +257,21 @@ const Projects = () => {
         {/* Additional Info */}
         <div 
           ref={infoRef}
-          className={`mt-16 text-center transition-all duration-1000 ${
+          className={`mt-12 md:mt-16 text-center transition-all duration-1000 ${
             isInfoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="card p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="card p-6 md:p-8 max-w-4xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4">
               More Projects & Contributions
             </h3>
-            <p className="text-gray-600 dark:text-white mb-6">
+            <p className="text-gray-600 dark:text-white mb-6 text-sm md:text-base">
               I've contributed to numerous other projects including OpenTable and Square integrations, 
               various startup MVPs, and open-source contributions. Many of my recent projects are 
               proprietary to the companies I've worked with, but I'm always excited to discuss 
               the technical challenges and solutions I've implemented.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <a
                 href="https://github.com/jon-kawasaki"
                 target="_blank"
