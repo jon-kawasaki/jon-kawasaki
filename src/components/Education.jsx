@@ -40,14 +40,18 @@ const Education = () => {
       <div className="container">
         <div 
           ref={sectionRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-20 transition-all duration-1000 ${
             isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-700 dark:text-primary-300 font-medium mb-6">
+            <span className="w-2 h-2 bg-primary-500 rounded-full mr-3 animate-pulse"></span>
+            Academic Journey
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Education & Activities
           </h2>
-          <p className="text-lg text-gray-600 dark:text-white max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
             Academic foundation and extracurricular involvement that shaped my technical journey
           </p>
         </div>
