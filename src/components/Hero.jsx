@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 
 const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false)
+  const heroRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16 relative">
       {/* Background Image */}
@@ -14,16 +34,21 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center">
           {/* Centered Content */}
-          <div className="text-center max-w-4xl">
+          <div 
+            ref={heroRef}
+            className={`text-center max-w-4xl transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <div className="mb-6">
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
                 Hi, I'm{' '}
                 <span className="gradient-text">Jonathan Kawasaki</span>
               </h1>
-              <h2 className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-medium mb-6">
-                Senior Full Stack Engineer
+              <h2 className="text-xl md:text-2xl text-gray-600 dark:text-gray-100 font-medium mb-6">
+                Senior Full Stack Engineer with 12+ Years of Experience
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-lg text-gray-600 dark:text-gray-200 mb-8 max-w-2xl mx-auto lg:mx-0">
                 Specialized in building scalable web platforms across SaaS products, booking/marketplace systems, 
                 enterprise dashboards, and high-traffic consumer applications.
               </p>
@@ -31,16 +56,16 @@ const Hero = () => {
 
             {/* Contact Info */}
             <div className="space-y-3 mb-8">
-              <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
-                <MapPin className="w-5 h-5 mr-3 text-primary-600" />
+              <div className="flex items-center justify-center text-gray-600 dark:text-gray-200">
+                <MapPin className="w-5 h-5 mr-3 text-primary-600 dark:text-primary-400" />
                 <span>Los Angeles, CA, United States</span>
               </div>
-              <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
-                <Phone className="w-5 h-5 mr-3 text-primary-600" />
+              <div className="flex items-center justify-center text-gray-600 dark:text-gray-200">
+                <Phone className="w-5 h-5 mr-3 text-primary-600 dark:text-primary-400" />
                 <span>(213) 232-4413</span>
               </div>
-              <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
-                <Mail className="w-5 h-5 mr-3 text-primary-600" />
+              <div className="flex items-center justify-center text-gray-600 dark:text-gray-200">
+                <Mail className="w-5 h-5 mr-3 text-primary-600 dark:text-primary-400" />
                 <span>jonkawa.pro@gmail.com</span>
               </div>
             </div>
@@ -51,7 +76,7 @@ const Hero = () => {
                 href="https://github.com/jon-kawasaki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-shadow duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-all duration-200 text-gray-600 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110"
               >
                 <Github size={24} />
               </a>
@@ -59,13 +84,13 @@ const Hero = () => {
                 href="https://linkedin.com/in/jkwski"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-shadow duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-all duration-200 text-gray-600 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110"
               >
                 <Linkedin size={24} />
               </a>
               <a
                 href="mailto:jonkawa.pro@gmail.com"
-                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-shadow duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full shadow-md hover:shadow-lg transition-all duration-200 text-gray-600 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110"
               >
                 <Mail size={24} />
               </a>

@@ -1,7 +1,12 @@
 import React from 'react'
 import { Code, Server, Cloud, TestTube, GitBranch, Smartphone } from 'lucide-react'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const Skills = () => {
+  const [sectionRef, isSectionVisible] = useScrollAnimation(0.1, 0)
+  const [skillsRef, isSkillsVisible] = useScrollAnimation(0.1, 200)
+  const [expertiseRef, isExpertiseVisible] = useScrollAnimation(0.1, 400)
+
   const skillCategories = [
     {
       icon: <Code className="w-6 h-6" />,
@@ -38,7 +43,12 @@ const Skills = () => {
   return (
     <section id="skills" className="section-padding bg-white dark:bg-gray-800">
       <div className="container">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Technical Skills
           </h2>
@@ -47,9 +57,20 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          ref={skillsRef}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-1000 ${
+            isSkillsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {skillCategories.map((category, index) => (
-            <div key={index} className="card p-6 hover:shadow-xl transition-shadow duration-300">
+            <div 
+              key={index} 
+              className={`card p-6 hover:shadow-xl transition-all duration-500 ${
+                isSkillsVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
                   <div className="text-primary-600">
@@ -70,22 +91,47 @@ const Skills = () => {
         </div>
 
         {/* Additional Skills Section */}
-        <div className="mt-16">
+        <div 
+          ref={expertiseRef}
+          className={`mt-16 transition-all duration-1000 ${
+            isExpertiseVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Specialized Expertise</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl">
+            <div 
+              className={`text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl transition-all duration-500 ${
+                isExpertiseVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '0ms' }}
+            >
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-300 mb-2">SSR/ISR</div>
               <div className="text-gray-600 dark:text-white font-medium">Server-Side Rendering</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl">
+            <div 
+              className={`text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl transition-all duration-500 ${
+                isExpertiseVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '100ms' }}
+            >
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-300 mb-2">GraphQL</div>
               <div className="text-gray-600 dark:text-white font-medium">API Development</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl">
+            <div 
+              className={`text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl transition-all duration-500 ${
+                isExpertiseVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '200ms' }}
+            >
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-300 mb-2">SEO</div>
               <div className="text-gray-600 dark:text-white font-medium">Search Optimization</div>
             </div>
-            <div className="text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl">
+            <div 
+              className={`text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-xl transition-all duration-500 ${
+                isExpertiseVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '300ms' }}
+            >
               <div className="text-3xl font-bold text-primary-600 dark:text-primary-300 mb-2">Microservices</div>
               <div className="text-gray-600 dark:text-white font-medium">Architecture</div>
             </div>

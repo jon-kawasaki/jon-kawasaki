@@ -1,7 +1,13 @@
 import React from 'react'
 import { Award, Users, Code, Rocket } from 'lucide-react'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const About = () => {
+  const [sectionRef, isSectionVisible] = useScrollAnimation(0.1, 0)
+  const [storyRef, isStoryVisible] = useScrollAnimation(0.1, 200)
+  const [statsRef, isStatsVisible] = useScrollAnimation(0.1, 400)
+  const [strengthsRef, isStrengthsVisible] = useScrollAnimation(0.1, 600)
+
   const stats = [
     { icon: <Code className="w-8 h-8" />, label: 'Years Experience', value: '10+' },
     { icon: <Users className="w-8 h-8" />, label: 'Projects Delivered', value: '50+' },
@@ -12,7 +18,12 @@ const About = () => {
   return (
     <section id="about" className="section-padding bg-white dark:bg-gray-800">
       <div className="container">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             About Me
           </h2>
@@ -23,7 +34,12 @@ const About = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Story */}
-          <div>
+          <div 
+            ref={storyRef}
+            className={`transition-all duration-1000 ${
+              isStoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">My Story</h3>
             <div className="space-y-4 text-gray-600 dark:text-white">
               <p>
@@ -45,9 +61,20 @@ const About = () => {
           </div>
 
           {/* Right Column - Stats */}
-          <div className="grid grid-cols-2 gap-6">
+          <div 
+            ref={statsRef}
+            className={`grid grid-cols-2 gap-6 transition-all duration-1000 ${
+              isStatsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             {stats.map((stat, index) => (
-              <div key={index} className="card p-6 text-center hover:shadow-xl transition-shadow duration-300">
+              <div 
+                key={index} 
+                className={`card p-6 text-center hover:shadow-xl transition-all duration-500 ${
+                  isStatsVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
                 <div className="text-primary-600 mb-4 flex justify-center">
                   {stat.icon}
                 </div>
@@ -63,10 +90,20 @@ const About = () => {
         </div>
 
         {/* Key Strengths */}
-        <div className="mt-16">
+        <div 
+          ref={strengthsRef}
+          className={`mt-16 transition-all duration-1000 ${
+            isStrengthsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Key Strengths</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
+            <div 
+              className={`text-center transition-all duration-500 ${
+                isStrengthsVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '0ms' }}
+            >
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Code className="w-8 h-8 text-primary-600" />
               </div>
@@ -75,7 +112,12 @@ const About = () => {
                 End-to-end development expertise from frontend React applications to backend microservices and cloud infrastructure.
               </p>
             </div>
-            <div className="text-center">
+            <div 
+              className={`text-center transition-all duration-500 ${
+                isStrengthsVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '200ms' }}
+            >
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-primary-600" />
               </div>
@@ -84,7 +126,12 @@ const About = () => {
                 Leading teams of frontend engineers, handling code reviews, sprint planning, and mentoring junior developers.
               </p>
             </div>
-            <div className="text-center">
+            <div 
+              className={`text-center transition-all duration-500 ${
+                isStrengthsVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '400ms' }}
+            >
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Rocket className="w-8 h-8 text-primary-600" />
               </div>

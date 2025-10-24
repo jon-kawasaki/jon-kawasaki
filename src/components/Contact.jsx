@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { Mail, Phone, MapPin, Send, Linkedin, Github } from 'lucide-react'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const Contact = () => {
+  const [sectionRef, isSectionVisible] = useScrollAnimation(0.1, 0)
+  const [formRef, isFormVisible] = useScrollAnimation(0.1, 200)
+  const [infoRef, isInfoVisible] = useScrollAnimation(0.1, 400)
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -64,7 +69,12 @@ const Contact = () => {
   return (
     <section id="contact" className="section-padding bg-white dark:bg-gray-800">
       <div className="container">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Get In Touch
           </h2>
@@ -75,7 +85,12 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}
-          <div>
+          <div 
+            ref={infoRef}
+            className={`transition-all duration-1000 ${
+              isInfoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Let's Connect</h3>
             
             <div className="space-y-6 mb-8">
@@ -83,7 +98,10 @@ const Contact = () => {
                 <a
                   key={index}
                   href={info.link}
-                  className="flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900 hover:shadow-md transition-all duration-200"
+                  className={`flex items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900 hover:shadow-md transition-all duration-500 ${
+                    isInfoVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
                     <div className="text-primary-600">
@@ -117,7 +135,12 @@ const Contact = () => {
             </div>
 
             {/* Current Status */}
-            <div className="mt-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-lg">
+            <div 
+              className={`mt-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 rounded-lg transition-all duration-500 ${
+                isInfoVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: '300ms' }}
+            >
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Current Status</h4>
               <p className="text-gray-600 dark:text-white mb-2">
                 Currently working as a Senior Full Stack Engineer at RedVentures
@@ -129,7 +152,12 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div>
+          <div 
+            ref={formRef}
+            className={`transition-all duration-1000 ${
+              isFormVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Send a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>

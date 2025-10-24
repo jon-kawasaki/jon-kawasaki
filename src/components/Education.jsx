@@ -1,7 +1,12 @@
 import React from 'react'
 import { GraduationCap, ExternalLink } from 'lucide-react'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const Education = () => {
+  const [sectionRef, isSectionVisible] = useScrollAnimation(0.1, 0)
+  const [educationRef, isEducationVisible] = useScrollAnimation(0.1, 200)
+  const [activitiesRef, isActivitiesVisible] = useScrollAnimation(0.1, 400)
+
   const education = [
     {
       institution: 'University of California, Berkeley',
@@ -30,7 +35,12 @@ const Education = () => {
   return (
     <section id="education" className="section-padding bg-white dark:bg-gray-800">
       <div className="container">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Education & Activities
           </h2>
@@ -39,9 +49,20 @@ const Education = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div 
+          ref={educationRef}
+          className={`max-w-4xl mx-auto transition-all duration-1000 ${
+            isEducationVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {education.map((edu, index) => (
-            <div key={index} className="card p-8 hover:shadow-xl transition-shadow duration-300">
+            <div 
+              key={index} 
+              className={`card p-8 hover:shadow-xl transition-all duration-500 ${
+                isEducationVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
               <div className="flex items-start">
                 <div className="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center mr-6 flex-shrink-0">
                   <GraduationCap className="w-8 h-8 text-primary-600" />
@@ -73,11 +94,22 @@ const Education = () => {
                     </div>
                   </div>
 
-                  <div className="mt-8">
+                  <div 
+                    ref={activitiesRef}
+                    className={`mt-8 transition-all duration-1000 ${
+                      isActivitiesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    }`}
+                  >
                     <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Activities & Involvement</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {edu.activities.map((activity, actIndex) => (
-                        <div key={actIndex} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                        <div 
+                          key={actIndex} 
+                          className={`bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-500 ${
+                            isActivitiesVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                          }`}
+                          style={{ transitionDelay: `${actIndex * 100}ms` }}
+                        >
                           <div className="flex items-start justify-between mb-3">
                             <h5 className="text-lg font-semibold text-gray-900 dark:text-white">{activity.name}</h5>
                             <a

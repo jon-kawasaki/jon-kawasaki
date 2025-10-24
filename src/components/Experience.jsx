@@ -1,7 +1,11 @@
 import React from 'react'
 import { Calendar, MapPin, ExternalLink } from 'lucide-react'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const Experience = () => {
+  const [sectionRef, isSectionVisible] = useScrollAnimation(0.1, 0)
+  const [experiencesRef, isExperiencesVisible] = useScrollAnimation(0.1, 200)
+
   const experiences = [
     {
       company: 'RedVentures',
@@ -66,7 +70,12 @@ const Experience = () => {
   return (
     <section id="experience" className="section-padding bg-gray-100 dark:bg-gray-900">
       <div className="container">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Professional Experience
           </h2>
@@ -76,7 +85,12 @@ const Experience = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div 
+          ref={experiencesRef}
+          className={`relative transition-all duration-1000 ${
+            isExperiencesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {/* Timeline line */}
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary-200"></div>
           
@@ -90,7 +104,12 @@ const Experience = () => {
                 
                 {/* Content */}
                 <div className="ml-8 flex-1">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                  <div 
+                    className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-500 ${
+                      isExperiencesVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                    }`}
+                    style={{ transitionDelay: `${index * 200}ms` }}
+                  >
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div>
                         <div className="flex items-center text-lg font-semibold text-primary-600 dark:text-primary-400">

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { ExternalLink, Github, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useScrollAnimation } from '../hooks/useScrollAnimation'
 
 const Projects = () => {
+  const [sectionRef, isSectionVisible] = useScrollAnimation(0.1, 0)
+  const [carouselRef, isCarouselVisible] = useScrollAnimation(0.1, 200)
+  const [infoRef, isInfoVisible] = useScrollAnimation(0.1, 400)
+  
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [hoveredIndex, setHoveredIndex] = useState(null)
@@ -128,7 +133,12 @@ const Projects = () => {
   return (
     <section id="projects" className="section-padding bg-gray-100 dark:bg-gray-900">
       <div className="container">
-        <div className="text-center mb-16">
+        <div 
+          ref={sectionRef}
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Featured Projects
           </h2>
@@ -138,7 +148,12 @@ const Projects = () => {
         </div>
 
         {/* Projects Carousel */}
-        <div className="relative max-w-6xl mx-auto">
+        <div 
+          ref={carouselRef}
+          className={`relative max-w-6xl mx-auto transition-all duration-1000 ${
+            isCarouselVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           {/* Carousel Container */}
           <div className="overflow-hidden">
             <div className="flex" style={getTransformStyle()}>
@@ -225,7 +240,12 @@ const Projects = () => {
         </div>
 
         {/* Additional Info */}
-        <div className="mt-16 text-center">
+        <div 
+          ref={infoRef}
+          className={`mt-16 text-center transition-all duration-1000 ${
+            isInfoVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <div className="card p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               More Projects & Contributions
