@@ -38,9 +38,15 @@ const Header = () => {
     }`}>
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
-            <a href="#home" onClick={() => scrollToSection('#home')} className="text-xl font-bold text-gray-900 dark:text-white">
-              Jonathan Kawasaki
+          <div className="flex-shrink-0 flex items-center">
+            <img 
+              src="/young.png" 
+              alt="Jonathan Kawasaki" 
+              className="w-10 h-10 rounded-full mr-3 object-cover"
+            />
+            <a href="#home" onClick={() => scrollToSection('#home')} className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
+              <span className="hidden sm:inline">Jonathan Kawasaki</span>
+              <span className="sm:hidden">J. Kawasaki</span>
             </a>
           </div>
 

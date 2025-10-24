@@ -1,7 +1,10 @@
-import React from 'react'
-import { ExternalLink, Github, Globe } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { ExternalLink, Github, Globe, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const Projects = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
   const projects = [
     {
       title: 'AllConnect Platform',
@@ -113,6 +116,63 @@ const Projects = () => {
     }
   ]
 
+  // Auto-slide functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % projects.length)
+    }, 4000) // Change slide every 4 seconds
+
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, projects.length])
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev + 1
+      if (next >= projects.length) {
+        // Reset to beginning for seamless loop
+        setTimeout(() => setCurrentSlide(0), 500)
+        return next
+      }
+      return next
+    })
+    setIsAutoPlaying(false) // Stop auto-play when user interacts
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => {
+      const prevSlide = prev - 1
+      if (prevSlide < 0) {
+        // Reset to end for seamless loop
+        setTimeout(() => setCurrentSlide(projects.length - 1), 500)
+        return prevSlide
+      }
+      return prevSlide
+    })
+    setIsAutoPlaying(false) // Stop auto-play when user interacts
+  }
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index)
+    setIsAutoPlaying(false) // Stop auto-play when user interacts
+  }
+
+  // Create extended array for smooth infinite rotation
+  const extendedProjects = [...projects, ...projects, ...projects]
+  const totalSlides = extendedProjects.length
+  const offset = projects.length
+
+  // Calculate transform for smooth sliding animation
+  const getTransformStyle = () => {
+    // Center the active project by moving the container
+    const translateX = -((currentSlide + offset) * 33.333) + 33.333
+    return {
+      transform: `translateX(${translateX}%)`,
+      transition: 'transform 500ms ease-in-out'
+    }
+  }
+
   return (
     <section id="projects" className="section-padding bg-gray-100 dark:bg-gray-900">
       <div className="container">
@@ -125,88 +185,137 @@ const Projects = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <div key={index} className="card p-8 hover:shadow-xl transition-shadow duration-300">
-              {/* Project Header */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                  <div className="flex items-center mb-2">
-                    <span className="text-primary-600 dark:text-primary-400 font-semibold">{project.company}</span>
-                    <span className="ml-2 px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full text-xs font-medium">
-                      {project.status}
-                    </span>
+        {/* Projects Carousel */}
+        <div className="relative max-w-6xl mx-auto">
+          {/* Carousel Container */}
+          <div className="overflow-hidden">
+            <div className="flex" style={getTransformStyle()}>
+              {extendedProjects.map((project, index) => {
+                const isActive = index === currentSlide + offset
+                const isPrev = index === currentSlide + offset - 1
+                const isNext = index === currentSlide + offset + 1
+                
+                return (
+                  <div key={index} className="w-1/3 flex-shrink-0 px-4">
+                    <div className={`card p-6 transition-all duration-500 ease-in-out ${
+                      isActive 
+                        ? 'scale-110 shadow-2xl z-10 opacity-100' 
+                        : (isPrev || isNext)
+                        ? 'scale-90 opacity-40 hover:opacity-60'
+                        : 'scale-75 opacity-20'
+                    }`}>
+                    {/* Project Header */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
+                        <div className="flex items-center mb-2">
+                          <span className="text-primary-600 dark:text-primary-400 font-semibold">{project.company}</span>
+                          <span className="ml-2 px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full text-xs font-medium">
+                            {project.status}
+                          </span>
+                        </div>
+                        <p className="text-gray-600 dark:text-white">{project.description}</p>
+                      </div>
+                    </div>
+
+                    {/* Company Logo */}
+                    <div className="mb-6">
+                      <div className="w-full h-24 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-gray-600 dark:text-white mb-1">{project.company}</div>
+                          <div className="text-sm text-gray-500 dark:text-gray-300">Company Logo</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Features */}
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Key Features:</h4>
+                      <ul className="space-y-2">
+                        {project.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <span className="text-gray-600 dark:text-white text-sm">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Technologies */}
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex gap-4">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200"
+                        >
+                          <Globe className="w-4 h-4 mr-2" />
+                          Live Demo
+                        </a>
+                      )}
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                        >
+                          <Github className="w-4 h-4 mr-2" />
+                          Source Code
+                        </a>
+                      )}
+                    </div>
+                    </div>
                   </div>
-                  <p className="text-gray-600 dark:text-white">{project.description}</p>
-                </div>
-              </div>
-
-              {/* Company Logo */}
-              <div className="mb-6">
-                <div className="w-full h-24 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-600 dark:text-white mb-1">{project.company}</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-300">Company Logo</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Features */}
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Key Features:</h4>
-                <ul className="space-y-2">
-                  {project.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <span className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-600 dark:text-white text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Technologies */}
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Links */}
-              <div className="flex gap-4">
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200"
-                  >
-                    <Globe className="w-4 h-4 mr-2" />
-                    Live Demo
-                  </a>
-                )}
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-                  >
-                    <Github className="w-4 h-4 mr-2" />
-                    Source Code
-                  </a>
-                )}
-              </div>
+                )
+              })}
             </div>
-          ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 z-20"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {projects.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  index === (currentSlide % projects.length)
+                    ? 'bg-primary-600 dark:bg-primary-400'
+                    : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Additional Info */}
@@ -233,7 +342,7 @@ const Projects = () => {
               </a>
               <a
                 href="#contact"
-                className="flex items-center justify-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="flex items-center justify-center px-6 py-3 border border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 rounded-lg hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-gray-900 transition-colors duration-200"
               >
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Discuss Projects

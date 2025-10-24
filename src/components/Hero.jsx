@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
@@ -84,23 +84,11 @@ const Hero = () => {
           {/* Right Column - Visual Element */}
           <div className="flex justify-center lg:justify-end">
             <div className="relative">
-              <div className="w-80 h-80 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center shadow-2xl">
-                <div className="w-72 h-72 bg-white rounded-full flex items-center justify-center shadow-inner">
-                  <div className="text-center">
-                    <div className="text-6xl font-bold gradient-text mb-2">JK</div>
-                    <div className="text-sm text-gray-600 font-medium">Full Stack Engineer</div>
-                    <div className="text-xs text-gray-500 mt-1">React • Next.js • Node.js</div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center animate-pulse">
-                <span className="text-primary-600 font-bold text-sm">React</span>
-              </div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center animate-pulse" style={{animationDelay: '1s'}}>
-                <span className="text-primary-600 font-bold text-xs">Next.js</span>
-              </div>
+              <img 
+                src="/body.png" 
+                alt="Jonathan Kawasaki" 
+                className="w-80 h-80 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] xl:w-[40rem] xl:h-[40rem] object-cover"
+              />
             </div>
           </div>
         </div>
