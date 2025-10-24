@@ -45,14 +45,18 @@ const Skills = () => {
       <div className="container">
         <div 
           ref={sectionRef}
-          className={`text-center mb-16 transition-all duration-1000 ${
+          className={`text-center mb-20 transition-all duration-1000 ${
             isSectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-700 dark:text-primary-300 font-medium mb-6">
+            <span className="w-2 h-2 bg-primary-500 rounded-full mr-3 animate-pulse"></span>
+            Technical Expertise
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Technical Skills
           </h2>
-          <p className="text-lg text-gray-600 dark:text-white max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
             Comprehensive expertise across modern web technologies, cloud platforms, and development tools
           </p>
         </div>
@@ -66,22 +70,33 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <div 
               key={index} 
-              className={`card p-6 hover:shadow-xl transition-all duration-500 ${
+              className={`group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-200 dark:border-gray-700 ${
                 isSkillsVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
-                  <div className="text-primary-600">
+              {/* Decorative Background Element */}
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-800 dark:to-primary-900 rounded-full -translate-y-10 translate-x-10 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+              
+              {/* Category Header */}
+              <div className="flex items-center mb-6 relative z-10">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center mr-4 group-hover:rotate-12 transition-transform duration-300">
+                  <div className="text-white">
                     {category.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{category.title}</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                  {category.title}
+                </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              
+              {/* Skills Tags */}
+              <div className="flex flex-wrap gap-2 relative z-10">
                 {category.skills.map((skill, idx) => (
-                  <span key={idx} className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
+                  <span 
+                    key={idx} 
+                    className="px-3 py-2 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 text-primary-700 dark:text-primary-300 rounded-xl text-sm font-medium border border-primary-200 dark:border-primary-700 hover:from-primary-100 hover:to-primary-200 dark:hover:from-primary-800 dark:hover:to-primary-700 transition-all duration-300 hover:scale-105"
+                  >
                     {skill}
                   </span>
                 ))}
@@ -97,9 +112,13 @@ const Skills = () => {
             isExpertiseVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Core Expertise</h3>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-secondary-100 dark:bg-secondary-900 rounded-full text-secondary-700 dark:text-secondary-300 font-medium mb-6">
+              <span className="w-2 h-2 bg-secondary-500 rounded-full mr-3 animate-pulse"></span>
+              Core Expertise
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Core Expertise</h3>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Specialized in modern web technologies and scalable architecture solutions
             </p>
           </div>
