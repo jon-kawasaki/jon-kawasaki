@@ -9,6 +9,7 @@ const Experience = () => {
   const experiences = [
     {
       company: 'RedVentures',
+      website: 'https://www.redventures.com',
       positions: [
         {
           title: 'Frontend Team Lead',
@@ -26,6 +27,7 @@ const Experience = () => {
     },
     {
       company: 'Sumeru Inc',
+      website: 'https://www.sumeru.com',
       positions: [
         {
           title: 'Senior Full-Stack & Mobile Engineer',
@@ -43,6 +45,7 @@ const Experience = () => {
     },
     {
       company: 'Goji Labs',
+      website: 'https://www.gojilabs.com',
       positions: [
         {
           title: 'Full-Stack & Mobile Developer',
@@ -55,6 +58,7 @@ const Experience = () => {
     },
     {
       company: 'Dogtown Media',
+      website: 'https://www.dogtownmedia.com',
       positions: [
         {
           title: 'Software Developer',
@@ -84,73 +88,113 @@ const Experience = () => {
           </p>
         </div>
 
-        {/* Timeline */}
+        {/* Professional Timeline */}
         <div 
           ref={experiencesRef}
-          className={`relative max-w-4xl mx-auto transition-all duration-1000 ${
+          className={`relative max-w-5xl mx-auto transition-all duration-1000 ${
             isExperiencesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary-200"></div>
+          {/* Timeline Line */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-200 via-primary-300 to-primary-200 dark:from-primary-700 dark:via-primary-600 dark:to-primary-700 transform md:-translate-x-0.5"></div>
           
-          <div className="space-y-12">
+          <div className="space-y-16">
             {experiences.map((exp, index) => (
-              <div key={index} className="relative flex items-start">
-                {/* Timeline dot */}
-                <div className="relative z-10 w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-sm">{index + 1}</span>
+              <div 
+                key={index} 
+                className={`relative flex items-center transition-all duration-1000 ${
+                  isExperiencesVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+                }`}
+                style={{ transitionDelay: `${index * 200}ms` }}
+              >
+                {/* Timeline Node */}
+                <div className="relative z-10 flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-110">
+                    <span className="text-white font-bold text-lg">{index + 1}</span>
+                  </div>
+                  <div className="absolute inset-0 w-16 h-16 bg-primary-200 dark:bg-primary-700 rounded-full animate-ping opacity-20"></div>
                 </div>
                 
-                {/* Content */}
-                <div className="ml-8 flex-1">
-                  <div 
-                    className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-500 ${
-                      isExperiencesVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
-                    }`}
-                    style={{ transitionDelay: `${index * 200}ms` }}
-                  >
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                      <div>
-                        <div className="flex items-center text-lg font-semibold text-primary-600 dark:text-primary-400">
-                          <span>{exp.company}</span>
-                          <ExternalLink className="w-4 h-4 ml-2" />
-                        </div>
-                      </div>
-                      <div className="mt-2 md:mt-0 md:text-right">
-                        <div className="flex items-center text-gray-500 dark:text-gray-400 md:justify-end">
-                          <MapPin className="w-4 h-4 mr-2" />
-                          <span className="text-sm">{exp.location}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4 mb-6">
-                      {exp.positions.map((position, posIndex) => (
-                        <div key={posIndex} className="border-l-2 border-primary-200 dark:border-primary-600 pl-4">
-                          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                            <h3 className="text-lg font-bold text-gray-900 dark:text-white">{position.title}</h3>
-                            <div className="flex items-center text-gray-500 dark:text-gray-400 md:justify-end">
-                              <Calendar className="w-4 h-4 mr-2" />
-                              <span className="text-sm font-medium">{position.duration}</span>
+                {/* Content Card */}
+                <div className={`flex-1 ml-8 md:ml-12 ${
+                  index % 2 === 0 ? 'md:mr-12' : 'md:ml-12'
+                }`}>
+                  <div className="relative group">
+                    {/* Card */}
+                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] border border-gray-100 dark:border-gray-700 overflow-hidden">
+                      {/* Decorative Elements */}
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-800 dark:to-primary-900 rounded-full -translate-y-12 translate-x-12 opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                      
+                      <div className="relative z-10 p-8">
+                        {/* Company Header */}
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                          <div className="flex items-center space-x-4 mb-4 md:mb-0">
+                            <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                              <span className="text-white font-bold text-sm">{exp.company.charAt(0)}</span>
+                            </div>
+                            <div>
+                              <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                                {exp.company}
+                              </h3>
+                              <div className="flex items-center text-gray-500 dark:text-gray-400 mt-1">
+                                <MapPin className="w-4 h-4 mr-2" />
+                                <span className="text-sm font-medium">{exp.location}</span>
+                              </div>
                             </div>
                           </div>
-                          <p className="text-gray-600 dark:text-white text-sm">{position.description}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technologies Used:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium"
+                          <a
+                            href={exp.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-primary-100 dark:hover:bg-primary-800 rounded-lg transition-all duration-300 hover:scale-110"
+                            title={`Visit ${exp.company} website`}
                           >
-                            {tech}
-                          </span>
-                        ))}
+                            <ExternalLink className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                          </a>
+                        </div>
+                        
+                        {/* Positions */}
+                        <div className="space-y-6 mb-8">
+                          {exp.positions.map((position, posIndex) => (
+                            <div 
+                              key={posIndex} 
+                              className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+                            >
+                              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2 md:mb-0">
+                                  {position.title}
+                                </h4>
+                                <div className="flex items-center text-gray-500 dark:text-gray-400">
+                                  <Calendar className="w-4 h-4 mr-2" />
+                                  <span className="text-sm font-semibold">{position.duration}</span>
+                                </div>
+                              </div>
+                              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                {position.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Technologies */}
+                        <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                          <div className="flex items-center mb-4">
+                            <div className="w-8 h-8 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-lg flex items-center justify-center mr-3">
+                              <span className="text-white font-bold text-sm">⚡</span>
+                            </div>
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Technologies</h4>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech, idx) => (
+                              <span
+                                key={idx}
+                                className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium hover:bg-primary-200 dark:hover:bg-primary-800 transition-colors duration-200"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
