@@ -113,8 +113,8 @@ const Skills = () => {
           }`}
         >
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-secondary-100 dark:bg-secondary-900 rounded-full text-secondary-700 dark:text-secondary-300 font-medium mb-6">
-              <span className="w-2 h-2 bg-secondary-500 rounded-full mr-3 animate-pulse"></span>
+            <div className="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900 rounded-full text-primary-700 dark:text-primary-300 font-medium mb-6">
+              <span className="w-2 h-2 bg-primary-500 rounded-full mr-3 animate-pulse"></span>
               Core Expertise
             </div>
             <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Core Expertise</h3>
