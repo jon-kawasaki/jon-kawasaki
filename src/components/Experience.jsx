@@ -10,6 +10,7 @@ const Experience = () => {
     {
       company: 'RedVentures',
       website: 'https://www.redventures.com',
+      logo: 'https://logo.clearbit.com/redventures.com',
       positions: [
         {
           title: 'Frontend Team Lead',
@@ -28,6 +29,7 @@ const Experience = () => {
     {
       company: 'Sumeru Inc',
       website: 'https://www.sumeru.com',
+      logo: 'https://logo.clearbit.com/sumeru.com',
       positions: [
         {
           title: 'Senior Full-Stack & Mobile Engineer',
@@ -46,6 +48,7 @@ const Experience = () => {
     {
       company: 'Goji Labs',
       website: 'https://www.gojilabs.com',
+      logo: 'https://logo.clearbit.com/gojilabs.com',
       positions: [
         {
           title: 'Full-Stack & Mobile Developer',
@@ -59,6 +62,7 @@ const Experience = () => {
     {
       company: 'Dogtown Media',
       website: 'https://www.dogtownmedia.com',
+      logo: 'https://logo.clearbit.com/dogtownmedia.com',
       positions: [
         {
           title: 'Software Developer',
@@ -129,8 +133,19 @@ const Experience = () => {
                         {/* Company Header */}
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                           <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                            <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
-                              <span className="text-white font-bold text-sm">{exp.company.charAt(0)}</span>
+                            <div className="w-12 h-12 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center border border-gray-200 dark:border-gray-600 shadow-sm">
+                              <img 
+                                src={exp.logo} 
+                                alt={`${exp.company} logo`}
+                                className="w-8 h-8 object-contain"
+                                onError={(e) => {
+                                  e.target.style.display = 'none';
+                                  e.target.nextSibling.style.display = 'block';
+                                }}
+                              />
+                              <span className="text-primary-600 dark:text-primary-400 font-bold text-sm hidden">
+                                {exp.company.charAt(0)}
+                              </span>
                             </div>
                             <div>
                               <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">

@@ -14,19 +14,22 @@ const Education = () => {
       duration: 'Aug 2009 - May 2013',
       location: 'Berkeley, California, United States',
       website: 'https://www.berkeley.edu',
+      logo: 'https://logo.clearbit.com/berkeley.edu',
       description: 'Completed undergraduate studies with a focus on software engineering, systems fundamentals, and applied computer science.',
       activities: [
         {
           name: 'ACM Programming Club',
           duration: '2009–2011',
           description: 'Practiced algorithms and data structures through peer sessions and internal coding challenges.',
-          website: 'https://www.ocf.berkeley.edu/~acm/'
+          website: 'https://www.ocf.berkeley.edu/~acm/',
+          logo: 'https://logo.clearbit.com/acm.org'
         },
         {
           name: 'Google Developer Student Clubs (GDSC)',
           duration: '2011–2013',
           description: 'Participated in student-led developer gatherings and workshops focused on web and app development.',
-          website: 'https://developers.google.com/community/gdsc'
+          website: 'https://developers.google.com/community/gdsc',
+          logo: 'https://logo.clearbit.com/developers.google.com'
         }
       ]
     }
@@ -71,8 +74,19 @@ const Education = () => {
                 {/* Header Section */}
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-8">
                   <div className="flex items-start space-x-6 mb-6 lg:mb-0">
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <GraduationCap className="w-10 h-10 text-white" />
+                    <div className="w-20 h-20 bg-white dark:bg-gray-700 rounded-2xl flex items-center justify-center shadow-lg border border-gray-200 dark:border-gray-600">
+                      <img 
+                        src={edu.logo} 
+                        alt={`${edu.institution} logo`}
+                        className="w-12 h-12 object-contain"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center hidden">
+                        <GraduationCap className="w-6 h-6 text-white" />
+                      </div>
                     </div>
                     <div className="flex-1">
                       <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">{edu.institution}</h3>
@@ -116,7 +130,9 @@ const Education = () => {
                 >
                   <div className="flex items-center mb-8">
                     <div className="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mr-4">
-                      <span className="text-white font-bold text-lg">🎯</span>
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
                     </div>
                     <div>
                       <h4 className="text-2xl font-bold text-gray-900 dark:text-white">Extracurricular Activities</h4>
@@ -137,9 +153,25 @@ const Education = () => {
                         
                         <div className="relative z-10">
                           <div className="flex items-start justify-between mb-4">
-                            <h5 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
-                              {activity.name}
-                            </h5>
+                            <div className="flex items-center space-x-3">
+                              <div className="w-10 h-10 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center border border-gray-200 dark:border-gray-600 shadow-sm">
+                                <img 
+                                  src={activity.logo} 
+                                  alt={`${activity.name} logo`}
+                                  className="w-6 h-6 object-contain"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'block';
+                                  }}
+                                />
+                                <span className="text-primary-600 dark:text-primary-400 font-bold text-sm hidden">
+                                  {activity.name.charAt(0)}
+                                </span>
+                              </div>
+                              <h5 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                                {activity.name}
+                              </h5>
+                            </div>
                             <a
                               href={activity.website}
                               target="_blank"
