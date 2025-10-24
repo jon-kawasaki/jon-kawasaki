@@ -3,11 +3,18 @@ import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16">
+    <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-white dark:from-gray-900 dark:to-gray-800 pt-16 relative">
+      {/* Background Image */}
+       <div 
+         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 dark:opacity-30"
+          style={{ backgroundImage: 'url("./los angeles.jpg")' }}
+       ></div>
+      {/* Content Overlay */}
+      <div className="relative z-10 w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Text Content */}
-          <div className="text-center lg:text-left">
+        <div className="flex justify-center">
+          {/* Centered Content */}
+          <div className="text-center max-w-4xl">
             <div className="mb-6">
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
                 Hi, I'm{' '}
@@ -24,22 +31,22 @@ const Hero = () => {
 
             {/* Contact Info */}
             <div className="space-y-3 mb-8">
-              <div className="flex items-center justify-center lg:justify-start text-gray-600 dark:text-gray-300">
+              <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
                 <MapPin className="w-5 h-5 mr-3 text-primary-600" />
                 <span>Los Angeles, CA, United States</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-gray-600 dark:text-gray-300">
+              <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
                 <Phone className="w-5 h-5 mr-3 text-primary-600" />
                 <span>(213) 232-4413</span>
               </div>
-              <div className="flex items-center justify-center lg:justify-start text-gray-600 dark:text-gray-300">
+              <div className="flex items-center justify-center text-gray-600 dark:text-gray-300">
                 <Mail className="w-5 h-5 mr-3 text-primary-600" />
                 <span>jonkawa.pro@gmail.com</span>
               </div>
             </div>
 
             {/* Social Links */}
-            <div className="flex justify-center lg:justify-start space-x-4 mb-8">
+            <div className="flex justify-center space-x-4 mb-8">
               <a
                 href="https://github.com/jon-kawasaki"
                 target="_blank"
@@ -65,7 +72,7 @@ const Hero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#contact"
                 className="btn-primary text-center"
@@ -80,18 +87,8 @@ const Hero = () => {
               </a>
             </div>
           </div>
-
-          {/* Right Column - Visual Element */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <img 
-                src="/body.png" 
-                alt="Jonathan Kawasaki" 
-                className="w-80 h-80 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] xl:w-[40rem] xl:h-[40rem] object-cover"
-              />
-            </div>
-          </div>
         </div>
+      </div>
       </div>
     </section>
   )

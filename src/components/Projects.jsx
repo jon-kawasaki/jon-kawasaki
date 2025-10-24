@@ -4,6 +4,7 @@ import { ExternalLink, Github, Globe, ChevronLeft, ChevronRight } from 'lucide-r
 const Projects = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [hoveredIndex, setHoveredIndex] = useState(null)
 
   const projects = [
     {
@@ -118,39 +119,27 @@ const Projects = () => {
 
   // Auto-slide functionality
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || hoveredIndex !== null) return
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % projects.length)
     }, 4000) // Change slide every 4 seconds
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying, projects.length])
+  }, [isAutoPlaying, projects.length, hoveredIndex])
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => {
-      const next = prev + 1
-      if (next >= projects.length) {
-        // Reset to beginning for seamless loop
-        setTimeout(() => setCurrentSlide(0), 500)
-        return next
-      }
-      return next
-    })
-    setIsAutoPlaying(false) // Stop auto-play when user interacts
+    if (currentSlide < projects.length - 1) {
+      setCurrentSlide((prev) => prev + 1)
+      setIsAutoPlaying(false) // Stop auto-play when user interacts
+    }
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => {
-      const prevSlide = prev - 1
-      if (prevSlide < 0) {
-        // Reset to end for seamless loop
-        setTimeout(() => setCurrentSlide(projects.length - 1), 500)
-        return prevSlide
-      }
-      return prevSlide
-    })
-    setIsAutoPlaying(false) // Stop auto-play when user interacts
+    if (currentSlide > 0) {
+      setCurrentSlide((prev) => prev - 1)
+      setIsAutoPlaying(false) // Stop auto-play when user interacts
+    }
   }
 
   const goToSlide = (index) => {
@@ -194,16 +183,21 @@ const Projects = () => {
                 const isActive = index === currentSlide + offset
                 const isPrev = index === currentSlide + offset - 1
                 const isNext = index === currentSlide + offset + 1
+                const isHovered = hoveredIndex === index
                 
                 return (
                   <div key={index} className="w-1/3 flex-shrink-0 px-4">
-                    <div className={`card p-6 transition-all duration-500 ease-in-out ${
-                      isActive 
-                        ? 'scale-110 shadow-2xl z-10 opacity-100' 
-                        : (isPrev || isNext)
-                        ? 'scale-90 opacity-40 hover:opacity-60'
-                        : 'scale-75 opacity-20'
-                    }`}>
+                    <div 
+                      className={`card p-6 transition-all duration-500 ease-in-out cursor-pointer ${
+                        isHovered
+                          ? 'scale-110 shadow-2xl z-10 opacity-100' 
+                          : (isPrev || isNext || isActive)
+                          ? 'scale-100 opacity-100'
+                          : 'scale-75 opacity-20'
+                      }`}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
                     {/* Project Header */}
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex-1">
