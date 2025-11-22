@@ -90,7 +90,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center text-gray-300">
                 <MapPin className="w-5 h-5 mr-3 text-primary-500" />
-                <span className="text-sm">Los Angeles, CA</span>
+                <span className="text-sm">Torrance, CA</span>
               </div>
             </div>
           </div>
@@ -111,7 +111,7 @@ const Footer = () => {
                   <Github className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/jkwski"
+                  href="https://linkedin.com/in/jon-kawasaki12"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"

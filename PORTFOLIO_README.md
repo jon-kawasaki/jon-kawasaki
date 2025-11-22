@@ -99,9 +99,9 @@ This project is open source and available under the [MIT License](LICENSE).
 **Jonathan Kawasaki**
 - Email: jonkawa.pro@gmail.com
 - Phone: (213) 232-4413
-- Location: Los Angeles, CA, United States
+- Location: Torrance, CA, United States
 - GitHub: [github.com/jon-kawasaki](https://github.com/jon-kawasaki)
-- LinkedIn: [linkedin.com/in/jkwski](https://linkedin.com/in/jkwski)
+- LinkedIn: [linkedin.com/in/jon-kawasaki12](https://linkedin.com/in/jon-kawasaki12)
 
 ---
 

@@ -46,8 +46,8 @@ const Contact = () => {
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Location',
-      value: 'Los Angeles, CA, United States',
-      link: 'https://maps.google.com/?q=Los+Angeles,+CA'
+      value: 'Torrance, CA, United States',
+      link: 'https://maps.google.com/?q=Torrance,+CA'
     }
   ]
 
@@ -55,7 +55,7 @@ const Contact = () => {
     {
       icon: <Linkedin className="w-6 h-6" />,
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/jkwski',
+      url: 'https://linkedin.com/in/jon-kawasaki12',
       color: 'bg-blue-600 hover:bg-blue-700'
     },
     {

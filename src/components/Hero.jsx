@@ -117,7 +117,7 @@ const Hero = () => {
                   <Github size={24} />
                 </a>
                 <a
-                  href="https://linkedin.com/in/jkwski"
+                  href="https://linkedin.com/in/jon-kawasaki12"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-gray-600 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:scale-110 border border-gray-200 dark:border-gray-700"
@@ -200,7 +200,7 @@ const Hero = () => {
             <div className="flex flex-wrap justify-center gap-8 text-gray-700 dark:text-gray-300">
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" />
-                <span className="font-medium">Los Angeles, CA</span>
+                <span className="font-medium">Torrance, CA</span>
               </div>
               <div className="flex items-center">
                 <Phone className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" />
